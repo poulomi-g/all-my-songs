@@ -23,6 +23,7 @@ const main = async () => {
     waitUntil: "networkidle0",
   });
 
+  console.log("Logging in...");
   await page.type("#username", process.env.EMAIL);
   await page.type("#password", process.env.PASSWORD);
   await page.click("#login-with-password");
@@ -33,12 +34,13 @@ const main = async () => {
     "#root > div:nth-child(1) > div > div > div > div > a:nth-child(3)";
   await page.waitForSelector(classSelect);
   await page.click(classSelect);
-
+  let iterations = 0;
   const navbar =
     "#root > div:nth-child(2) > div.typing-results.scrollable-results > div.bottom-nav-bar > div";
   const tryAgain =
     "#root > div:nth-child(2) > div.typing-results.scrollable-results > div.bottom-nav-bar > div > button.btn.navbar-goback.hoverable-button.default > span";
 
+  console.log("Starting rampage...");
   async function type(num) {
     await page.waitForSelector("body > input[type=text]");
     await asyncForEach(text, async line => {
@@ -47,6 +49,7 @@ const main = async () => {
     });
     await page.waitFor(3000);
     await page.goto("https://www.typingclub.com/sportal/program-3/3270.play");
+    console.log("Iterations: " + iterations++);
     if (num > 0) {
       await type(num - 1);
     }
