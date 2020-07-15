@@ -17,7 +17,7 @@ const asyncForEach = async (array, callback) => {
 };
 
 const main = async () => {
-  const browser = await puppeteer.launch({ headless: false, slowMo: 14 });
+  const browser = await puppeteer.launch({ slowMo: 14 });
   const page = await browser.newPage();
   await page.goto("https://www.typingclub.com/login.html", {
     waitUntil: "networkidle0",
@@ -38,23 +38,25 @@ const main = async () => {
     "#root > div:nth-child(2) > div.typing-results.scrollable-results > div.bottom-nav-bar > div";
   const tryAgain =
     "#root > div:nth-child(2) > div.typing-results.scrollable-results > div.bottom-nav-bar > div > button.btn.navbar-goback.hoverable-button.default > span";
-  while (true) {
+
+  async function type(num) {
     await page.waitForSelector("body > input[type=text]");
-    await page.keyboard.type(text[0]);
-    await page.keyboard.press("Enter");
-    await page.keyboard.type(text[1]);
-    await page.keyboard.press("Enter");
-    await page.keyboard.type(text[2]);
-    await page.keyboard.press("Enter");
-    await page.keyboard.type(text[3]);
-    await page.keyboard.press("Enter");
-    await page.keyboard.type(text[4]);
-    await page.keyboard.press("Enter");
-    await page.keyboard.type(text[5]);
-    await page.keyboard.press("Enter");
-    await page.waitForSelector(navbar);
-    await page.click(tryAgain);
+    await asyncForEach(text, async line => {
+      await page.keyboard.type(line);
+      await page.keyboard.press("Enter");
+    });
+    await page.waitFor(3000);
+    await page.goto("https://www.typingclub.com/sportal/program-3/3270.play");
+    if (num > 0) {
+      await type(num - 1);
+    }
   }
+  const arr = new Array(100).fill(0);
+  await asyncForEach(arr, async () => {
+    await asyncForEach(arr, async () => {
+      await type(100);
+    });
+  });
 };
 
 if (process.env.EMAIL != null) main();
