@@ -47,16 +47,20 @@ async function main() {
     );
     const cellContent = tableRows.map(row =>
       Array.from(row.children).map(cell => {
-        const children = Array.from(cell.children);
-        if (children.length <= 1)
-          return children[0] != null ? children[0].innerHTML.trim() : "";
+        const children = Array.from(cell.children).map(child =>
+          child != null ? child.innerHTML : ""
+        );
+        if (children.length <= 1) return children[0] ? children[0].trim() : "";
 
-        return children.map(line => {});
+        return children
+          .map((line, idx) => (idx > 0 ? line.match(/>(.*?)</g) : line))
+          .join(" ");
       })
     );
 
     return cellContent;
   });
+  console.log(deliveryProgress);
   console.log(deliveryProgressNoLocation);
 }
 
