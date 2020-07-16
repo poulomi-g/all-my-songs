@@ -25,20 +25,39 @@ async function main() {
 
   await page.click("#showMoreLink");
 
-  const deliveryProgress = await page.evaluate(() => {
-    const tableBody = document.querySelector("#trackprogresstable > tbody");
-    const tableRows = Array.from(tableBody.children);
-    const tableCells = tableRows.map(row => Array.from(row.children));
-    const cellContent = tableCells.map(row =>
-      row.map(cell => {
-        const child = Array.from(cell.children)[0];
-        return child != null ? child.innerHTML.trim() : "";
+  // This works but it doesn't get the location of the parcel which is kinda useless
+  const deliveryProgressNoLocation = await page.evaluate(() => {
+    const tableRows = Array.from(
+      document.querySelectorAll("#trackprogresstable > tbody > tr")
+    );
+    const cellContent = tableRows.map(row =>
+      Array.from(row.children).map(cell => {
+        const firstChild = cell.firstElementChild;
+        return firstChild != null ? firstChild.innerHTML.trim() : "";
       })
     );
+
     return cellContent;
   });
 
-  console.log(deliveryProgress);
+  // UNDER CONSTRUCTION
+  const deliveryProgress = await page.evaluate(() => {
+    const tableRows = Array.from(
+      document.querySelectorAll("#trackprogresstable > tbody > tr")
+    );
+    const cellContent = tableRows.map(row =>
+      Array.from(row.children).map(cell => {
+        const children = Array.from(cell.children);
+        if (children.length <= 1)
+          return children[0] != null ? children[0].innerHTML.trim() : "";
+
+        return children.map(line => {});
+      })
+    );
+
+    return cellContent;
+  });
+  console.log(deliveryProgressNoLocation);
 }
 
 main();
