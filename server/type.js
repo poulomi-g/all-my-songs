@@ -57,7 +57,7 @@ async function main() {
     });
     await page.waitFor(waitTime * 1000);
     await page.goto(levelLink);
-    console.log("Iterations: " + iterations++);
+    console.log("Iterations: " + ++iterations);
     if (num > 0) {
       await type(num - 1);
     }
