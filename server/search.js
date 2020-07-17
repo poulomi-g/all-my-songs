@@ -47,14 +47,19 @@ async function main() {
     );
     const cellContent = tableRows.map(row =>
       Array.from(row.children).map(cell => {
-        const children = Array.from(cell.children).map(child =>
-          child != null ? child.innerHTML : ""
-        );
-        if (children.length <= 1) return children[0] ? children[0].trim() : "";
+        const children = Array.from(cell.children);
 
-        return children
-          .map((line, idx) => (idx > 0 ? line.match(/>(.*?)</g) : line))
+        // all's good
+        if (children.length <= 1)
+          return children[0] ? children[0].innerHTML.trim() : "";
+
+        // it's the dreaded third row
+        const description = children[0].innerHTML;
+        const city = Array.from(children[1].children)
+          .map(el => el.innerHTML)
           .join(" ");
+
+        return city != "" ? { description, city } : { description };
       })
     );
 
