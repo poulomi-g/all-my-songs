@@ -1,0 +1,50 @@
+{
+  "data": [
+    {
+      "date": "July 10",
+      "description": "Delivered to your community mailbox, parcel locker or apt./condo mailbox",
+      "time": "3:22 pm",
+      "city": "Edmonton, AB"
+    },
+    {
+      "date": "July 10",
+      "description": "Item out for delivery",
+      "time": "10:45 am",
+      "city": "Edmonton, AB"
+    },
+    {
+      "date": "July 10",
+      "description": "Item processed",
+      "time": "4:33 am",
+      "city": "Edmonton, AB"
+    },
+    {
+      "date": "July 9",
+      "description": "Item processed",
+      "time": "8:35 am",
+      "city": "Edmonton, AB"
+    },
+    {
+      "date": "July 4",
+      "description": "Item in transit",
+      "time": "4:05 am",
+      "city": "Mississauga, ON"
+    },
+    {
+      "date": "July 4",
+      "description": "Item processed",
+      "time": "1:18 am",
+      "city": "Mississauga, ON"
+    },
+    {
+      "date": "June 24",
+      "description": "Item was released by Customs and is now with Canada Post for processing",
+      "time": "5:17 pm",
+      "city": "Mississauga, ON"
+    },
+    {
+      "date": "June 17",
+      "description": "Electronic information submitted by shipper"
+    }
+  ]
+}
