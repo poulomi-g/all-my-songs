@@ -3,6 +3,7 @@ import axios from "axios";
 import "./App.css";
 
 const TRACKING_NUM = 1023038647106760;
+const T_NUM2 = 1023038646584392;
 
 interface TrackInfo {
   date: string;
@@ -21,7 +22,7 @@ export default function App() {
       console.log(res.data);
       setTrackingInfo(res.data);
     };
-    getData(TRACKING_NUM);
+    getData(T_NUM2);
   }, []);
   return (
     <div className="App">
