@@ -10,10 +10,6 @@ class WebScraper {
     this.browser = await puppeteer.launch();
   }
 
-  async close() {
-    await this.browser.close();
-  }
-
   async getTrackingInfo(TRACKING_NUM) {
     const page = await this.browser.newPage();
 

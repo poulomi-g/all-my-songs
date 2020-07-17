@@ -11,6 +11,7 @@ const scraper = new WebScraper();
 
 app.get("/:id", async (req, res) => {
   const data = await scraper.getTrackingInfo(req.params.id);
+
   if (data.length == 0) {
     res.send("Could not find tracking data");
   } else {
